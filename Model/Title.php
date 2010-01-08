@@ -3,16 +3,15 @@
 class Model_Title{
 
     function __construct(){
-        $db = new Mongo();
-        $database = "wiki";
-        $collection = "pages";
-        $this->model = $db->$database->$collection;
+        $this->db = new DBAL_Mongo();
     }
 
 
     function getTitleContent($title) {
-        
+        $content = $this->db->findOneByTitle($title);
 
+
+        return $content;
     }
 
     function getTitleFiles($title){

@@ -1,6 +1,8 @@
 <?php
 
 class Controller_IndexController{
+    private $_page;
+    private $_action;
 
     function __construct(){
         $queryStrings = explode( "/", $_GET['q'] );
@@ -23,7 +25,7 @@ class Controller_IndexController{
 
         $page = implode("::",array_slice($queryStrings, 0, $queryCount) );
 
-        $this->page = $page;
+        $this->_page = $page;
 
     }
 
@@ -36,5 +38,8 @@ class Controller_IndexController{
         return $this->_page;
     }
 
+    function getAction() {
+        return $this->_action;
+    }
 
 }

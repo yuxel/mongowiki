@@ -81,3 +81,26 @@ body {
 .revisionInfo {color:#BBBBBB}
 
 .content {margin-top:10px}
+
+
+.buttons a {
+    font-weight:bold;
+    text-decoration:none;
+    padding:0 10px;
+}  
+
+.buttons a:hover {
+    text-decoration:underline;
+}
+
+.buttonEdit {
+    color:#e3ad00;
+}
+
+.buttonHistory {
+    color:#ce0000;
+}
+
+.buttonShow {
+    color:#5b7118;
+}

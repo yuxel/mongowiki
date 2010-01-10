@@ -1,0 +1,27 @@
+MongoWiki
+--------
+Yet another wiki which stores data on MongoDB (http://www.mongodb.org);
+
+
+Features
+--------
+Stores data on MongoDB
+Has WYSIWYG editor ( http://tinymce.moxiecode.com/ )
+Highlights Code Syntax (http://softwaremaniacs.org/soft/highlight/en/)
+
+
+TODO
+--------
+Sidebar support
+Multilanguage support
+Impage upload support with versioning
+File upload support with versioning
+
+
+Known issues
+--------
+MongoDB connection not handled carefully, if connection not established
+
+
+Author : Osman Yuksel < yuxel | sonsuzdongu | com > 
+

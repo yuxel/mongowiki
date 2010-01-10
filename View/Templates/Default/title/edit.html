@@ -1,0 +1,15 @@
+<div class="buttons">
+<a href="{$URL}/{$pageUri}">Göster</a>
+<a href="{$URL}/{$pageUri}/@history">Geçmiş</a>
+</div>
+
+<div class="content">
+    
+<form method="post" action="{$URL}/{$pageUri}/@save">
+    <div>
+        <input type="hidden" name="revision" />
+        <textarea id="elm1" name="elm1" rows="70" cols="80" style="width: 100%; height:500px" class="tinymce">{$titleContent.content|@htmlspecialchars}</textarea>
+        <input type="submit" value="Kaydet"/>
+    </div>
+</form>
+</div>

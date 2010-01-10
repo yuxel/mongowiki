@@ -1,0 +1,31 @@
+<div class="buttons">
+<a href="{$URL}/{$pageUri}/@edit?revision={$titleContent._id}">Duzenle</a>
+<a href="{$URL}/{$pageUri}/@history">Geçmiş</a>
+</div>
+
+<div class="content">
+
+    {if !$history}
+        <a href="{$URL}/{$pageUri}/@edit">Bu sayfayı oluştur</a>
+    {else}
+        <table>
+            <tr>
+                <th>Değiştirme tarihi</th>
+                <th>Son değiştiren</th>
+                <th>Not</th>
+                <th></th>
+                <th></th>
+            </tr>
+        {foreach from=$history item=item}
+            <tr>
+                <td>{$item._time|date_format}</td>
+                <td>{$item.author}</td>
+                <td>{$item.note}</td>
+                <td><a href="{$URL}/{$pageUri}/@show?revision={$item._id}">Görüntüle</a></td>
+                <td><a href="{$URL}/{$pageUri}/@edit?revision={$item._id}">Değiştir</a></td>
+            </tr>
+        {/foreach}
+
+        </table>
+    {/if}
+</div>

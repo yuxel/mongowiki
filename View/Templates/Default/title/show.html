@@ -1,0 +1,12 @@
+<div class="buttons">
+<a href="{$URL}/{$pageUri}/@edit?revision={$titleContent._id}">Duzenle</a>
+<a href="{$URL}/{$pageUri}/@history">Geçmiş</a>
+</div>
+
+<div class="content">
+    {if !$titleContent}
+        <a href="{$URL}/{$pageUri}/@edit">Bu sayfayı oluştur</a>
+    {else}
+        {$titleContent.content}
+    {/if}
+</div>

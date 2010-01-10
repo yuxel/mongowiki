@@ -1,0 +1,26 @@
+body {
+	font:12px Arial, sans-serif;
+	margin:0px; 
+    padding:0px;
+}
+
+.clear{
+	clear: both;
+}
+
+.hidden {display:none}
+
+.float_left {float:left}
+.float_right {float:right}
+
+.center {width:960px; margin:0 auto}
+
+#header {
+    background-color:#172120;
+}
+
+#header .header {
+    background:url("../img/header.jpg");
+    height:87px;
+}
+

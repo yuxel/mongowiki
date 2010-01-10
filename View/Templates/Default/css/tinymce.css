@@ -1,0 +1,21 @@
+.codeExample {
+    background:#d1f6a2 url('../img/code.png') no-repeat 15px 50%;
+    display:block;
+    margin:10px 40px;
+    padding:10px 10px 10px 70px;
+    min-height:40px;
+    height:auto !important;
+    height:40px;
+}
+
+.note {
+    background-color:#f9b91d;
+    margin:10px 40px;
+    padding:10px 10px 10px 70px;
+    background:#fffdc2 url('../img/note.png') no-repeat 15px 50%;
+    display:block;
+    min-height:40px;
+    height:auto !important;
+    height:40px;
+
+}

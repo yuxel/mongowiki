@@ -8,7 +8,7 @@
     {if !$history}
         <a href="{$URL}/{$pageUri}/@edit">Bu sayfayı oluştur</a>
     {else}
-        <table>
+        <table id="historyTable">
             <tr>
                 <th>Değiştirme tarihi</th>
                 <th>Son değiştiren</th>
@@ -16,13 +16,13 @@
                 <th></th>
                 <th></th>
             </tr>
-        {foreach from=$history item=item}
-            <tr>
-                <td>{$item._time|date_format}</td>
-                <td>{$item.author}</td>
-                <td>{$item.note}</td>
-                <td><a href="{$URL}/{$pageUri}/@show?revision={$item._id}">Görüntüle</a></td>
-                <td><a href="{$URL}/{$pageUri}/@edit?revision={$item._id}">Değiştir</a></td>
+        {foreach from=$history key=key item=item}
+            <tr class="row_{$key%2}">
+                <td class="time">{$item._time|date_format:"%d-%m-%Y ~ %H:%M:%S"}</td>
+                <td class="author">{$item.author}</td>
+                <td>{$item.comment}</td>
+                <td class="show"><a href="{$URL}/{$pageUri}/@show?revision={$item._id}">Görüntüle</a></td>
+                <td class="edit"><a href="{$URL}/{$pageUri}/@edit?revision={$item._id}">Değiştir</a></td>
             </tr>
         {/foreach}
 

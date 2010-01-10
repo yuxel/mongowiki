@@ -1,11 +1,20 @@
-<div class="buttons">
-<a href="{$URL}/{$pageUri}/@edit?revision={$titleContent._id}">Duzenle</a>
-<a href="{$URL}/{$pageUri}/@history">Geçmiş</a>
+<div class="buttons float_left">
+    <a href="{$URL}/{$pageUri}/@edit?revision={$titleContent._id}">Duzenle</a>
+    <a href="{$URL}/{$pageUri}/@history">Geçmiş</a>
 </div>
 
-<div class="content">
+<div class="float_right revisionInfo">
+{if $titleContent}
+    Son olarak, <b>{$titleContent.author}</b> tarafından  {$titleContent._time|date_format:"%d-%m-%Y ~ %H:%M:%S"} tarihinde güncellenmiş
+{/if}
+</div>
+
+<div class="content clear">
+
     {if !$titleContent}
-        <a href="{$URL}/{$pageUri}/@edit">Bu sayfayı oluştur</a>
+        <div class="generateNewPage">
+            <a href="{$URL}/{$pageUri}/@edit">Bu sayfayı oluştur</a>
+        </div>
     {else}
         {$titleContent.content}
     {/if}

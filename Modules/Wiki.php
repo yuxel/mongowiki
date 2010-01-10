@@ -4,7 +4,7 @@ class Modules_Wiki extends Modules{
 
     function run() {
         
-        $this->model = new Model_Title($this->_db);
+        $this->model = new Model_Wiki($this->_db);
 
         $page = $this->_controller->getPage();
 
@@ -13,14 +13,16 @@ class Modules_Wiki extends Modules{
         $action = $this->_controller->getAction();
 
         $revision = $_GET['revision'];
-        $content  = $_POST['elm1'];
-
         switch($action) {
             case "show":
                         $output = $this->showPage($page, $revision);        
                         break;
             case "save":
-                        $output = $this->savePage($page, $content);        
+                        $content  = $_POST['elm1'];
+                        $comment  = $_POST['comment'];
+                        $username = $_POST['username'];
+
+                        $output = $this->savePage($page, $content, $username, $comment);        
                         break;
 
             case "history":
@@ -46,14 +48,16 @@ class Modules_Wiki extends Modules{
 
         $titleContent = $this->model->getTitleContent($page, $revision);
 
-        //highligtcode
-        $titleContent['content'] = $this->highlightCode( $titleContent['content'] );
-        
-        //url handler, which switchs {|url/to/go|} for this site
-        $titleContent['content'] = $this->fixInnerURLs( $titleContent['content'] );
+        if($titleContent) {
+            //highligtcode
+            $titleContent['content'] = $this->highlightCode( $titleContent['content'] );
+            
+            //url handler, which switchs {|url/to/go|} for this site
+            $titleContent['content'] = $this->fixInnerURLs( $titleContent['content'] );
 
-        //tidy up this code
-        $titleContent['content'] = $this->tidy ( $titleContent['content'] );
+            //tidy up this code
+            $titleContent['content'] = $this->tidy ( $titleContent['content'] );
+        }
 
         $this->_view->assign("titleContent", $titleContent );
         $pageContent = $this->_view->fetch("title/show.html");
@@ -87,11 +91,11 @@ class Modules_Wiki extends Modules{
     /**
      * save page to database
      */
-    function savePage($page, $content) {
+    function savePage($page, $content, $username, $comment) {
         
         $content = $this->safeHtml($content);       
 
-        $this->model->setTitleContent($page, $content);
+        $this->model->setTitleContent($page, $content, $username, $comment);
         return $this->showPage($page);
     }
 

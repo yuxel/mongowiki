@@ -19,8 +19,63 @@ body {
     background-color:#172120;
 }
 
+#header a.logo {
+    display:block;
+    width:250px;
+    height:80px;
+    cursor:pointer;
+}
+
+
 #header .header {
     background:url("../img/header.jpg");
     height:87px;
 }
 
+
+.generateNewPage {
+    height:50px;
+    background:url('../img/ok.png') no-repeat 30px 50%;
+    padding:5px;
+    width:200px;
+}
+
+.generateNewPage a {
+    display:block;
+    padding-left:80px;
+    margin-top:20px;
+    color:#000000;
+    font-weight:bold;
+    text-decoration:none
+}
+
+#editForm .comment {width:300px;}
+
+#historyTable {
+    width:90%;
+    margin:0 auto;
+}
+
+#historyTable th, #historyTable td {
+        border:1px solid #BBBBBB;
+        padding:4px;
+}
+
+#historyTable th {
+    text-align:center;
+    font-weight:bold;
+}
+
+#historyTable .row_0 {background:#efefef}
+#historyTable a {font-weight:bold; text-decoration:none}
+#historyTable a:hover {text-decoration:underline}
+#historyTable td.time {width:150px; text-align:center}
+
+#historyTable td.show {width:70px; text-align:center}
+#historyTable td.show a{color:#518e40}
+
+
+#historyTable td.edit {width:70px;text-align:center }
+#historyTable td.edit a{color:#e3ad00 }
+
+.revisionInfo {color:#BBBBBB}

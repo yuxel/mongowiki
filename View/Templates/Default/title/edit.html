@@ -1,3 +1,32 @@
+{literal}
+<script type="text/javascript">
+$(document).ready( function() {
+    $("#editForm .submitButton").click( function() {
+        usernameSet = parseInt($(".username").val().length);
+        commentSet  = parseInt($(".comment").val().length);
+
+        var errorText = null;
+        if(usernameSet == 0 && commentSet == 0) {
+            errorText = "Lütfen adınızı ve yorumunuzu yazın";
+        }
+        else if(usernameSet == 0) {
+            errorText = "Lütfen kullanıcı adınızı yazın";
+        }
+        else if(commentSet == 0) {
+            errorText = "Lütfen bir yorum yazın";
+        }
+
+        if( errorText ) {
+            alert(errorText);
+            return false;
+        }
+    });
+});
+
+</script>
+{/literal}
+
+
 <div class="buttons">
 <a href="{$URL}/{$pageUri}">Göster</a>
 <a href="{$URL}/{$pageUri}/@history">Geçmiş</a>
@@ -5,11 +34,14 @@
 
 <div class="content">
     
-<form method="post" action="{$URL}/{$pageUri}/@save">
+<form method="post" action="{$URL}/{$pageUri}/@save" id="editForm">
     <div>
         <input type="hidden" name="revision" />
         <textarea id="elm1" name="elm1" rows="70" cols="80" style="width: 100%; height:500px" class="tinymce">{$titleContent.content|@htmlspecialchars}</textarea>
-        <input type="submit" value="Kaydet"/>
+        Kullanıcı <input class="username" type="text" name="username"/>  &nbsp; &nbsp;
+        Yorum <input class="comment" type="text" name="comment"/>
+
+        <input type="submit" value="Kaydet" class="submitButton"/> 
     </div>
 </form>
 </div>

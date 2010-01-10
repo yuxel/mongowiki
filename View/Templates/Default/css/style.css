@@ -80,7 +80,10 @@ body {
 
 .revisionInfo {color:#BBBBBB}
 
-.content {margin-top:10px}
+.content {
+    padding-top:5px;
+    border-top:1px dotted #BBB;
+}
 
 
 .buttons a {

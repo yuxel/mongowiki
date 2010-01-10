@@ -6,6 +6,7 @@
     min-height:40px;
     height:auto !important;
     height:40px;
+    overflow:auto;
 }
 
 .note {
@@ -17,5 +18,5 @@
     min-height:40px;
     height:auto !important;
     height:40px;
-
+    overflow:auto;
 }

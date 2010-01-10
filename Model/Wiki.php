@@ -41,6 +41,9 @@ class Model_Wiki{
         $contents = $this->db->find($search)->sort( array('$natural'=>-1) );
 
         foreach($contents as $content) {
+            $content['comment'] = stripslashes($content['comment']);
+            $content['author'] = stripslashes($content['author']);
+
             $content['_time'] = $content['_id']->getTimestamp();
             $content['_id'] = $content['_id']->__toString();
             $history[] = $content;

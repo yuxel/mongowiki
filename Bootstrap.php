@@ -25,20 +25,11 @@ class Bootstrap{
     /**
      * init mongo
      */
-    function initDb(){
-        //@todo db and collection should read
-        //@todo from an config file
-        //@todo exception should be handled
-       
-        $hostAndPort = "localhost:27017";
-        $dbName      = "foo";
-        $collection  = "bar";
-        $connection = new Mongo($hostAndPort,true,true);
-        $selectedDb = $connection->selectDB($dbName);
+    function initModel(){
+        $modelInstance = Model_Wiki::getInstance();
 
-        $this->db   = $selectedDb->selectCollection($collection);
-        $this->grid =  $selectedDb->getGridFS();
-        
+        $modelInstance->putFile("README", "README", "_main");
+        $modelInstance->getFileHistory("README","_main");
         return $this;
     }
 

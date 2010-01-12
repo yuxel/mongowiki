@@ -2,8 +2,45 @@
 
 class Model_Wiki{
 
-    function __construct($db){
-        $this->db = $db;
+    /**
+     * singleton instance
+     */
+    private static $instance;
+
+    private function __construct(){
+
+        //@todo these should be read from a config file
+        $hostAndPort = "localhost:27017";
+        $dbName      = "foo";
+        $collection  = "bar";
+
+        $connection = new Mongo($hostAndPort,true,true);
+        $selectedDb = $connection->selectDB($dbName);
+
+        $this->db   = $selectedDb->selectCollection($collection);
+        $this->grid =  $selectedDb->getGridFS();
+
+        //$saveStatus = $this->grid->storeFile ("README", array("page"=>"_main"));
+
+/*        
+        $foo = $this->grid->find( array("page"=>"_main") );
+
+        foreach($foo as $x) {
+            var_dump ($x->getBytes());
+        }
+        
+ */
+    }
+
+
+    public static function getInstance() 
+    {
+        if (!isset(self::$instance)) {
+            $thisClass = __CLASS__;
+            self::$instance = new $thisClass;
+        }
+
+        return self::$instance;
     }
 
 
@@ -61,12 +98,30 @@ class Model_Wiki{
 
     }
 
-    function upsertTitleFile($file){
-
+    function putFile($fileToPut, $filename, $page) {
+        return $this->grid->storeFile ($fileToPut, array("name"=>$filename, "page"=>$page));
     }
 
-    function getFileHistory($title, $file) {
+    function getFileHistory($filename, $page) {
+    
+        $files = $this->grid->find(array("name"=>$filename, "page"=>$page) );
 
+        foreach($files as $file) {
+            
+            $_id = $file->file['_id'];
+            $time = $_id->getTimestamp();
+            $revision = $_id->__toString();
+
+            $fileArray[] = array("time"=>$time,
+                          "revision"=>$revision);
+
+        }
+        
+        return $fileArray;
+    }
+
+
+    function getFile($filename, $revision=null) {
 
     }
 

@@ -4,7 +4,7 @@ class Modules_Wiki extends Modules{
 
     function run() {
         
-        $this->model = new Model_Wiki($this->_db);
+        $this->model = Model_Wiki::getInstance();
 
         $page = $this->_controller->getPage();
         $action = $this->_controller->getAction();

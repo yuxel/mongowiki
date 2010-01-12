@@ -10,10 +10,31 @@
 }
 
 .note {
-    background-color:#f9b91d;
     margin:10px 40px;
     padding:10px 10px 10px 70px;
     background:#fffdc2 url('../img/note.png') no-repeat 15px 50%;
+    display:block;
+    min-height:40px;
+    height:auto !important;
+    height:40px;
+    overflow:auto;
+}
+
+.input {
+    margin:10px 40px;
+    padding:10px 10px 10px 70px;
+    background:#cdd0df url('../img/input.png') no-repeat 15px 50%;
+    display:block;
+    min-height:40px;
+    height:auto !important;
+    height:40px;
+    overflow:auto;
+}
+
+.output {
+    margin:10px 40px;
+    padding:10px 10px 10px 70px;
+    background:#dfc6df url('../img/output.png') no-repeat 15px 50%;
     display:block;
     min-height:40px;
     height:auto !important;

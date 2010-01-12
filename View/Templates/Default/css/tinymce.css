@@ -23,7 +23,7 @@
 .input {
     margin:10px 40px;
     padding:10px 10px 10px 70px;
-    background:#cdd0df url('../img/input.png') no-repeat 15px 50%;
+    background:#e7a3a3 url('../img/input.png') no-repeat 15px 50%;
     display:block;
     min-height:40px;
     height:auto !important;
@@ -34,7 +34,7 @@
 .output {
     margin:10px 40px;
     padding:10px 10px 10px 70px;
-    background:#dfc6df url('../img/output.png') no-repeat 15px 50%;
+    background:#a3c8e7 url('../img/output.png') no-repeat 15px 50%;
     display:block;
     min-height:40px;
     height:auto !important;

@@ -29,9 +29,16 @@ class Bootstrap{
         //@todo db and collection should read
         //@todo from an config file
         //@todo exception should be handled
+       
+        $hostAndPort = "localhost:27017";
+        $dbName      = "foo";
+        $collection  = "bar";
+        $connection = new Mongo($hostAndPort,true,true);
+        $selectedDb = $connection->selectDB($dbName);
+
+        $this->db   = $selectedDb->selectCollection($collection);
+        $this->grid =  $selectedDb->getGridFS();
         
-        $connection = new Mongo();
-        $this->db = $connection->foo->bar; 
         return $this;
     }
 
@@ -52,6 +59,7 @@ class Bootstrap{
         $this->module->setController ( $this->controller );
         $this->module->setView ( $this->view );
         $this->module->setDb ( $this->db );
+        $this->module->setGrid ( $this->grid );
       
         $this->module->run();
         return $this;

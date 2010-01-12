@@ -6,7 +6,8 @@
 <div class="content">
 
     {if !$history}
-        <a href="{$URL}/{$pageUri}/@edit">Bu sayfayı oluştur</a>
+        Bu sayfa henüz oluşturulmammış, dolayısıyla geçmiş bilgisi yok <br/>
+        <a href="{$URL}/{$pageUri}/@edit">Oluşturmak ister misiniz?</a>
     {else}
         <table id="historyTable">
             <tr>

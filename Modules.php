@@ -16,6 +16,11 @@ abstract class Modules{
         $this->_db = $db;
     }
 
+    function setGrid($grid) {
+        $this->_grid = $grid;
+    }
+
+
 
     function setModuleContent($content) {
         $this->_view->assign("moduleContent", $content);

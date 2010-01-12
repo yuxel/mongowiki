@@ -54,6 +54,8 @@ class Model_Wiki{
 
 
     function setTitleContent($title, $content, $username, $comment){
+        $username = htmlspecialchars ( $username );
+        $comment = htmlspecialchars( $comment );
         $data = array("title"=>$title, "content"=>$content, "author"=>$username, "comment"=>$comment);
         $this->db->insert ( $data );
 

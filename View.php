@@ -25,4 +25,6 @@ class View extends Smarty{
     function displayMainPage(){
         $this->display ( "mainContent.html");
     }
+
+
 }

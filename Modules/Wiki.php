@@ -7,10 +7,11 @@ class Modules_Wiki extends Modules{
         $this->model = new Model_Wiki($this->_db);
 
         $page = $this->_controller->getPage();
+        $action = $this->_controller->getAction();
 
         $this->_view->assign("pageUri", $page );
+        $this->_view->assign("action", $action );
 
-        $action = $this->_controller->getAction();
 
         $revision = $_GET['revision'];
         switch($action) {
@@ -22,7 +23,12 @@ class Modules_Wiki extends Modules{
                         $comment  = $_POST['comment'];
                         $username = $_POST['username'];
 
-                        $output = $this->savePage($page, $content, $username, $comment);        
+                        $this->savePage($page, $content, $username, $comment);        
+                       
+                        //redirect to show page 
+                        $showUrl = $this->_controller->getPageUrl()."/".$page;
+                        $this->redirect( $showUrl );
+
                         break;
 
             case "history":
@@ -92,11 +98,13 @@ class Modules_Wiki extends Modules{
      * save page to database
      */
     function savePage($page, $content, $username, $comment) {
-        
+       
+        if(!$page || !$content || !$username || !$comment ) {
+            return false;
+        }
         $content = $this->safeHtml($content);       
 
         $this->model->setTitleContent($page, $content, $username, $comment);
-        return $this->showPage($page);
     }
 
 
@@ -133,6 +141,7 @@ class Modules_Wiki extends Modules{
     function showEditPage($page, $revision=null) {
 
         $titleContent = $this->model->getTitleContent($page, $revision);
+        $titleContent['content'] = htmlspecialchars ( $titleContent['content'] );
 
         $this->_view->assign("titleContent", $titleContent );
         $pageContent = $this->_view->fetch("title/edit.html");

@@ -21,6 +21,13 @@ abstract class Modules{
         $this->_view->assign("moduleContent", $content);
     }
 
+
+    function redirect($url) {
+        //$this->_view->assign("otherContent", "<script type=\"text/javascript\">window.location='$url';</script>");
+        header("Location: $url");
+    }
+
+
     /**
      * all modules should implement run();
      */

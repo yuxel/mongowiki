@@ -80,7 +80,7 @@ body {
 
 .revisionInfo {color:#BBBBBB}
 
-.content {
+.wiki_content {
     padding-top:5px;
     border-top:1px dotted #BBB;
     padding-bottom:50px;
@@ -109,10 +109,22 @@ body {
     color:#5b7118;
 }
 
-a.title_filled {
+.wiki_content a.wiki_url {
+        padding-right:0px;
+        background:none;
+}
+
+.wiki_content a.wiki_url.filled {
     color: blue;
 }
 
-a.title_empty {
+.wiki_content a.wiki_url.empty {
     color: red;
+}
+
+.wiki_content a {
+        background:url('../img/external_link.png') no-repeat right;
+        padding-right:13px;
+        color: green; 
+        font-weight:bold;
 }

@@ -142,10 +142,10 @@ class Modules_Wiki extends Modules{
     function pregReplaceCallbackForPageExists($string) {
         $text = $string[1];
         if($this->model->checkIfTitleExists($text) ) {
-            $class = "title_filled";
+            $class = "wiki_url filled";
         }
         else{
-            $class = "title_empty";
+            $class = "wiki_url empty";
         }
         return $text."\" class=\"$class";
     }

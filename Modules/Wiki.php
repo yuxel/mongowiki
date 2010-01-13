@@ -103,8 +103,9 @@ class Modules_Wiki extends Modules{
         if(!$page || !$header || !$content || !$username || !$comment  ) {
             return false;
         }
-        $content = $this->safeHtml($content);       
 
+        
+        $safeContent = $this->safeHtml($content);       
         $this->model->setPageContent($page, $header, $content, $username, $comment);
     }
 
@@ -173,8 +174,6 @@ class Modules_Wiki extends Modules{
      * @todo security is not implemented yet
      */
     function safeHtml($content) {
-        //@todo we should check magic_quotess
-        $content = stripslashes($content);
         return $content;
     }
 

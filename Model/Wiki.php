@@ -107,7 +107,17 @@ class Model_Wiki{
         $username = htmlspecialchars ( $username );
         $comment  = htmlspecialchars( $comment );
         $header   = htmlspecialchars( $header );
-        $data = array("page"=>$page, "header"=>$header, "content"=>$content, "author"=>$username, "comment"=>$comment);
+        $content  = stripslashes ( stripslashes( $content ));
+        
+        $strippedSearch = html_entity_decode(strip_tags( $header ." ". $content ));
+
+        $data = array("page"=>$page, 
+                      "header"=>$header, 
+                      "content"=>$content, 
+                      "author"=>$username, 
+                      "comment"=>$comment, 
+                      "search"=>$strippedSearch
+                    );
         $this->db->insert ( $data );
 
     }

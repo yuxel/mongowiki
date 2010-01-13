@@ -108,3 +108,11 @@ body {
 .buttonShow {
     color:#5b7118;
 }
+
+a.title_filled {
+    color: blue;
+}
+
+a.title_empty {
+    color: red;
+}

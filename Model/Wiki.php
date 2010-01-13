@@ -43,6 +43,12 @@ class Model_Wiki{
         return self::$instance;
     }
 
+    function checkIfTitleExists($title) {
+        $search = array("title"=>$title);
+        $result = $this->db->findOne($search);
+        return $result ? true : false;
+    }
+
 
     function getTitleContent($title, $revision=null) {
 

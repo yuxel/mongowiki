@@ -130,10 +130,26 @@ class Modules_Wiki extends Modules{
      */
     function pregReplaceCallbackForHightlight($string) {
         $text = $string[1]; //found string
-        $text =  preg_replace('/\<br(\s*)?\/?\>/i', "\n", $text);
+        $text =  preg_replace('/\<br(\s*)?\/?\>/i', "\n", $text); //br2nl
         $return = "<pre><code class=\"codeExample\">".$text."</code></pre>";
         return $return;
     }
+
+
+    /**
+     * preg replace callback for if link exists
+     */
+    function pregReplaceCallbackForPageExists($string) {
+        $text = $string[1];
+        if($this->model->checkIfTitleExists($text) ) {
+            $class = "title_filled";
+        }
+        else{
+            $class = "title_empty";
+        }
+        return $text."\" class=\"$class";
+    }
+
 
     /**
      * editing page
@@ -167,9 +183,9 @@ class Modules_Wiki extends Modules{
     function fixInnerURLs($string){
         $search = '/\{\|(.*?)\|\}/is';
         $url = $this->_controller->getPageUrl();
-        $replace =  $url.'/\\1'; 
+        $replace =  $url.'/\\1'."\" style=\"color:red"; 
 
-        $string = preg_replace($search,$replace, $string);
+        $string = preg_replace_callback($search,array($this, 'pregReplaceCallbackForPageExists'), $string);
 
         return $string;
     }

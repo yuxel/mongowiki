@@ -59,7 +59,7 @@ class Modules_Wiki extends Modules{
             //highligtcode
             $pageContent['content'] = $this->highlightCode( $pageContent['content'] );
             
-            //url handler, which switchs {|url/to/go|} for this site
+            //url handler, which switchs [[url/to/go]] for this site
             $pageContent['content'] = $this->fixInnerURLs( $pageContent['content'] );
 
             //tidy up this code
@@ -182,7 +182,7 @@ class Modules_Wiki extends Modules{
      * fixs {|url/to/go|} for web sites' url
      */
     function fixInnerURLs($string){
-        $search = '/\{\|(.*?)\|\}/is';
+        $search = '/\[\[(.*?)\]\]/is';
         $url = $this->_controller->getPageUrl();
         $replace =  $url.'/\\1'."\" style=\"color:red"; 
 

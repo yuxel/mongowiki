@@ -48,22 +48,22 @@ class Model_Wiki{
         return self::$instance;
     }
 
-    function checkIfTitleExists($title) {
-        $search = array("title"=>$title);
+    function checkIfPageExists($page) {
+        $search = array("page"=>$page);
         $result = $this->db->findOne($search);
         return $result ? true : false;
     }
 
 
-    function getTitleContent($title, $revision=null) {
+    function getPageContent($page, $revision=null) {
 
         if( $revision ) {
             $_id = new MongoId($revision);
-            $search = array("_id"=>$_id, "title"=>$title);
+            $search = array("_id"=>$_id, "page"=>$page);
             $content = $this->db->findOne($search);
         }
         else{
-            $search = array("title"=>$title);
+            $search = array("page"=>$page);
             $contents = $this->db->find($search)->sort( array('$natural'=>-1) )->limit(1);
             
             foreach($contents as $item) {
@@ -72,6 +72,7 @@ class Model_Wiki{
         }
 
         if($content) {
+            $content['header'] = stripslashes($content['header']);
             $content['_time'] = $content['_id']->getTimestamp();
             $content['_id'] = $content['_id']->__toString();
         }
@@ -79,18 +80,19 @@ class Model_Wiki{
         return $content;
     }
 
-    function getTitleFiles($title){
+    function getPageFiles($page){
 
 
     }
 
-    function getHistory($title) {
-        $search = array("title"=>$title);
+    function getHistory($page) {
+        $search = array("page"=>$page);
         $contents = $this->db->find($search)->sort( array('$natural'=>-1) );
 
         foreach($contents as $content) {
             $content['comment'] = stripslashes($content['comment']);
             $content['author'] = stripslashes($content['author']);
+            $content['header'] = stripslashes($content['header']);
 
             $content['_time'] = $content['_id']->getTimestamp();
             $content['_id'] = $content['_id']->__toString();
@@ -101,10 +103,11 @@ class Model_Wiki{
     }
 
 
-    function setTitleContent($title, $content, $username, $comment){
+    function setPageContent($page, $header, $content, $username, $comment){
         $username = htmlspecialchars ( $username );
-        $comment = htmlspecialchars( $comment );
-        $data = array("title"=>$title, "content"=>$content, "author"=>$username, "comment"=>$comment);
+        $comment  = htmlspecialchars( $comment );
+        $header   = htmlspecialchars( $header );
+        $data = array("page"=>$page, "header"=>$header, "content"=>$content, "author"=>$username, "comment"=>$comment);
         $this->db->insert ( $data );
 
     }

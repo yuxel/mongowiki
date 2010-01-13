@@ -1,0 +1,22 @@
+<div class="buttons float_left">
+    <a class="buttonEdit" href="{$URL}/{$pageUri}/@edit?revision={$pageContent._id}">Düzenle</a>
+    <a class="buttonHistory" href="{$URL}/{$pageUri}/@history">Geçmiş</a>
+</div>
+
+<div class="float_right revisionInfo">
+{if $pageContent}
+    Son olarak, <b>{$pageContent.author}</b> tarafından  {$pageContent._time|date_format:"%d-%m-%Y ~ %H:%M:%S"} tarihinde güncellenmiş
+{/if}
+</div>
+
+<div class="wiki_content clear">
+
+    {if !$pageContent}
+        <div class="generateNewPage">
+            <a href="{$URL}/{$pageUri}/@edit" class="wiki_url">Bu sayfayı oluştur</a>
+        </div>
+    {else}
+        <div class="wiki_header">{$pageContent.header}</div>
+        {$pageContent.content}
+    {/if}
+</div>

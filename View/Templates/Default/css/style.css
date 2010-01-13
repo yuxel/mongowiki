@@ -49,6 +49,15 @@ body {
     text-decoration:none
 }
 
+#editForm .header  {
+    padding:5px 0;
+}
+#editForm .header input {
+    width:600px;
+    padding:5px;
+    font-size:14px;
+    font-weight:bold;
+}
 #editForm .comment {width:300px;}
 
 #historyTable {
@@ -140,4 +149,12 @@ body {
     padding:20px;
     font-size:30px;
     text-align:center;
+}
+
+.wiki_header {
+    font-size:20px;
+    font-weight:bold;
+    padding-bottom:8px;
+
+
 }

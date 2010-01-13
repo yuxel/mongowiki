@@ -1,5 +1,5 @@
 <div class="buttons">
-    <a class="buttonEdit" href="{$URL}/{$pageUri}/@edit?revision={$titleContent._id}">Düzenle</a>
+    <a class="buttonEdit" href="{$URL}/{$pageUri}/@edit?revision={$pageContent._id}">Düzenle</a>
     <a class="buttonHistory" href="{$URL}/{$pageUri}/@history">Geçmiş</a>
 </div>
 
@@ -7,7 +7,7 @@
 
     {if !$history}
         Bu sayfa henüz oluşturulmammış, dolayısıyla geçmiş bilgisi yok <br/>
-        <a href="{$URL}/{$pageUri}/@edit">Oluşturmak ister misiniz?</a>
+        <a class="wiki_url" href="{$URL}/{$pageUri}/@edit">Oluşturmak ister misiniz?</a>
     {else}
         <table id="historyTable">
             <tr>
@@ -22,8 +22,8 @@
                 <td class="time">{$item._time|date_format:"%d-%m-%Y ~ %H:%M:%S"}</td>
                 <td class="author">{$item.author}</td>
                 <td>{$item.comment}</td>
-                <td class="show"><a href="{$URL}/{$pageUri}/@show?revision={$item._id}">Görüntüle</a></td>
-                <td class="edit"><a href="{$URL}/{$pageUri}/@edit?revision={$item._id}">Değiştir</a></td>
+                <td class="show"><a class="wiki_url" href="{$URL}/{$pageUri}/@show?revision={$item._id}">Görüntüle</a></td>
+                <td class="edit"><a class="wiki_url" href="{$URL}/{$pageUri}/@edit?revision={$item._id}">Değiştir</a></td>
             </tr>
         {/foreach}
 

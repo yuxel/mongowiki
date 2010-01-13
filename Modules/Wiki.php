@@ -22,8 +22,9 @@ class Modules_Wiki extends Modules{
                         $content  = $_POST['elm1'];
                         $comment  = $_POST['comment'];
                         $username = $_POST['username'];
+                        $header   = $_POST['header'];
 
-                        $this->savePage($page, $content, $username, $comment);        
+                        $this->savePage($page, $header, $content, $username, $comment);        
                        
                         //redirect to show page 
                         $showUrl = $this->_controller->getPageUrl()."/".$page;
@@ -47,26 +48,26 @@ class Modules_Wiki extends Modules{
     /**
      * show page
      * 
-     * @param string $page page title
+     * @param string $page page page
      * @param string $revision revision
      */
     function showPage($page, $revision=null) {
 
-        $titleContent = $this->model->getTitleContent($page, $revision);
+        $pageContent = $this->model->getPageContent($page, $revision);
 
-        if($titleContent) {
+        if($pageContent) {
             //highligtcode
-            $titleContent['content'] = $this->highlightCode( $titleContent['content'] );
+            $pageContent['content'] = $this->highlightCode( $pageContent['content'] );
             
             //url handler, which switchs {|url/to/go|} for this site
-            $titleContent['content'] = $this->fixInnerURLs( $titleContent['content'] );
+            $pageContent['content'] = $this->fixInnerURLs( $pageContent['content'] );
 
             //tidy up this code
-            $titleContent['content'] = $this->tidy ( $titleContent['content'] );
+            $pageContent['content'] = $this->tidy ( $pageContent['content'] );
         }
 
-        $this->_view->assign("titleContent", $titleContent );
-        $pageContent = $this->_view->fetch("title/show.html");
+        $this->_view->assign("pageContent", $pageContent );
+        $pageContent = $this->_view->fetch("wiki/show.html");
         
         return $pageContent;
     } 
@@ -97,14 +98,14 @@ class Modules_Wiki extends Modules{
     /**
      * save page to database
      */
-    function savePage($page, $content, $username, $comment) {
+    function savePage($page, $header, $content, $username, $comment) {
        
-        if(!$page || !$content || !$username || !$comment ) {
+        if(!$page || !$header || !$content || !$username || !$comment  ) {
             return false;
         }
         $content = $this->safeHtml($content);       
 
-        $this->model->setTitleContent($page, $content, $username, $comment);
+        $this->model->setPageContent($page, $header, $content, $username, $comment);
     }
 
 
@@ -141,7 +142,7 @@ class Modules_Wiki extends Modules{
      */
     function pregReplaceCallbackForPageExists($string) {
         $text = $string[1];
-        if($this->model->checkIfTitleExists($text) ) {
+        if($this->model->checkIfPageExists($text) ) {
             $class = "wiki_url filled";
         }
         else{
@@ -156,11 +157,11 @@ class Modules_Wiki extends Modules{
      */
     function showEditPage($page, $revision=null) {
 
-        $titleContent = $this->model->getTitleContent($page, $revision);
-        $titleContent['content'] = htmlspecialchars ( $titleContent['content'] );
+        $pageContent = $this->model->getPageContent($page, $revision);
+        $pageContent['content'] = htmlspecialchars ( $pageContent['content'] );
 
-        $this->_view->assign("titleContent", $titleContent );
-        $pageContent = $this->_view->fetch("title/edit.html");
+        $this->_view->assign("pageContent", $pageContent );
+        $pageContent = $this->_view->fetch("wiki/edit.html");
 
         return $pageContent;
     } 
@@ -198,7 +199,7 @@ class Modules_Wiki extends Modules{
         $history = $this->model->getHistory($page);
 
         $this->_view->assign("history", $history );
-        $pageContent = $this->_view->fetch("title/history.html");
+        $pageContent = $this->_view->fetch("wiki/history.html");
 
         return $pageContent;
     }

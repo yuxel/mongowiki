@@ -9,7 +9,12 @@
     <form method="post" action="{$URL}/{$pageUri}/@save" id="editForm">
         <div>
             <input type="hidden" name="revision" />
-            <textarea id="elm1" name="elm1" rows="70" cols="80" style="width: 100%; height:500px" class="tinymce">{$titleContent.content}</textarea>
+
+            <div class="header"> 
+                Sayfa başlığı <input type="text" name="header" value="{$pageContent.header}"/> 
+            </div>
+
+            <textarea id="elm1" name="elm1" rows="70" cols="80" style="width: 100%; height:500px" class="tinymce">{$pageContent.content}</textarea>
             Kullanıcı <input class="username" type="text" name="username"/>  &nbsp; &nbsp;
             Yorum <input class="comment" type="text" name="comment"/>
 

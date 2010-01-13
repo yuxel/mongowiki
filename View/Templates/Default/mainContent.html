@@ -28,16 +28,23 @@
     </head>
     <body>
 
-        <div id="header">
-            <div class="header center">
-                <a class="logo"  href="{$URL}"></a>
+        {if $fatalError} 
+            <div class="fatalError">
+                {$fatalError}
             </div>
-        </div>
-        <div class="clear"></div>
-        <div class="center">
-            {$otherContent}
-            {$moduleContent}
-        </div>
+       {else}
+            <div id="header">
+                <div class="header center">
+                    <a class="logo"  href="{$URL}"></a>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="center">
+                {$otherContent}
+                {$moduleContent}
+            </div>
+        {/if}
+
     </body>
 
 </html>

@@ -26,11 +26,14 @@ class Bootstrap{
      * init mongo
      */
     function initModel(){
-        $modelInstance = Model_Wiki::getInstance();
-
-        $modelInstance->putFile("README", "README", "_main");
-        $modelInstance->getFileHistory("README","_main");
-        return $this;
+        try {
+            $modelInstance = Model_Wiki::getInstance();
+        }
+        catch(Exception $e) {
+            return false;
+        }
+        
+        return true;
     }
 
 
@@ -40,19 +43,24 @@ class Bootstrap{
      * related module
      */
     function initModule () {
-        $moduleClass = "Modules_". $this->controller->getModule();
-        $this->module = new $moduleClass;
-    
+
         $this->url = $this->controller->getPageUrl(); 
         $this->view->assign("ThemeDir", $this->url."/".$this->view->template_dir);
         $this->view->assign("URL", $this->url);
 
-        $this->module->setController ( $this->controller );
-        $this->module->setView ( $this->view );
-        $this->module->setDb ( $this->db );
-        $this->module->setGrid ( $this->grid );
-      
-        $this->module->run();
+        if(!$this->initModel() ) {
+            $this->view->assign("fatalError", "MONGODB_CONNECTION_FAILED");
+        } 
+        else{
+            $moduleClass = "Modules_". $this->controller->getModule();
+            $this->module = new $moduleClass;
+        
+            $this->module->setController ( $this->controller );
+            $this->module->setView ( $this->view );
+            $this->module->setGrid ( $this->grid );
+          
+            $this->module->run();
+        }
         return $this;
     }
 

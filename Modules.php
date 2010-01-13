@@ -12,20 +12,13 @@ abstract class Modules{
         $this->_view = $view;
     }
 
-    function setDb($db) {
-        $this->_db = $db;
-    }
-
     function setGrid($grid) {
         $this->_grid = $grid;
     }
 
-
-
     function setModuleContent($content) {
         $this->_view->assign("moduleContent", $content);
     }
-
 
     function redirect($url) {
         //$this->_view->assign("otherContent", "<script type=\"text/javascript\">window.location='$url';</script>");

@@ -128,3 +128,16 @@ body {
         color: green; 
         font-weight:bold;
 }
+
+
+.fatalError {
+    width:500px; 
+    margin:0 auto;
+    background:#be0001;
+    border:2px dotted #000000;
+    color:#FFFFFF;
+    font-weight:bold;
+    padding:20px;
+    font-size:30px;
+    text-align:center;
+}

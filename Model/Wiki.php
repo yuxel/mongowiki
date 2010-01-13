@@ -2,23 +2,28 @@
 
 class Model_Wiki{
 
+    const MONGODB_CONNECTION_FAILED = "Mongodb connection failed";
+
     /**
      * singleton instance
      */
     private static $instance;
 
     private function __construct(){
+        $hostAndPort = Config_Mongodb::HOST_PORT;
+        $dbName      = Config_Mongodb::DB;
+        $collection  = Config_Mongodb::COLLECTION;
 
-        //@todo these should be read from a config file
-        $hostAndPort = "localhost:27017";
-        $dbName      = "foo";
-        $collection  = "bar";
+        try{
+            $connection = new Mongo($hostAndPort,true,true);
+            $selectedDb = $connection->selectDB($dbName);
 
-        $connection = new Mongo($hostAndPort,true,true);
-        $selectedDb = $connection->selectDB($dbName);
-
-        $this->db   = $selectedDb->selectCollection($collection);
-        $this->grid =  $selectedDb->getGridFS();
+            $this->db   = $selectedDb->selectCollection($collection);
+            $this->grid =  $selectedDb->getGridFS();
+        }
+        catch(Exception $e) {
+            throw new Exception(self::MONGODB_CONNECTION_FAILED);
+        }
 
         //$saveStatus = $this->grid->storeFile ("README", array("page"=>"_main"));
 

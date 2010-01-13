@@ -8,7 +8,6 @@ include_once("AutoLoader.php");
 $bootstrap = new Bootstrap();
 
 $bootstrap->initController()
-          ->initModel()
           ->initView()
           ->initModule()
           ->output();

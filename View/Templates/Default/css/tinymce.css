@@ -41,3 +41,17 @@
     height:40px;
     overflow:auto;
 }
+
+
+.tableWithBorder {
+   margin:0 auto;
+}
+
+.tableWithBorder, .tableWithBorder td, .tableWithBorder tr, .tableWithBorder th {
+    border:1px solid #BBBBBB;
+    border-spacing:0px;
+}
+
+.tableWithBorder td {
+    padding:4px;
+}

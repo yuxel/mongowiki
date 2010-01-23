@@ -124,6 +124,9 @@ class Modules_Wiki extends Modules{
         $search = '/\<span class=\"codeExample\"\>(.*?)\<\/span\>/is';
         $pageContent = preg_replace_callback($search, array( &$this, 'pregReplaceCallbackForHightlight') , $pageContent);
 
+        $search = '/\<div class=\"codeExample\"\>(.*?)\<\/div\>/is';
+        $pageContent = preg_replace_callback($search, array( &$this, 'pregReplaceCallbackForHightlight') , $pageContent);
+
         return $pageContent;
     }
     
@@ -149,7 +152,12 @@ class Modules_Wiki extends Modules{
         else{
             $class = "wiki_url empty";
         }
-        return $text."\" class=\"$class";
+        $return = $text."\" class=\"$class";
+        $url = $this->_controller->getPageUrl();
+
+        $return  = $url."/".$return;
+
+        return $return;
     }
 
 
@@ -182,9 +190,6 @@ class Modules_Wiki extends Modules{
      */
     function fixInnerURLs($string){
         $search = '/\[\[(.*?)\]\]/is';
-        $url = $this->_controller->getPageUrl();
-        $replace =  $url.'/\\1'."\" style=\"color:red"; 
-
         $string = preg_replace_callback($search,array($this, 'pregReplaceCallbackForPageExists'), $string);
 
         return $string;
